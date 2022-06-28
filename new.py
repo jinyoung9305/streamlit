@@ -449,30 +449,6 @@ st.code(
         """
 )
 
-st.code(
-    """
-    # Countvectorizer 적용을 위해 list로 변환
-    list_df = df['Text'].tolist()
-    tokenizer = get_tokenizer('mecab')
-
-    tokenized_sentence = []
-
-    for sentence in tqdm(list_df):
-        sent_mecab = tokenizer.nouns(sentence)
-        # 형태소 분석기 적용 (명사)
-        sent_mecab = [word for word in sent_mecab if not word in stop_words_list]
-        # 불용어 제거
-        sent_mecab = [word for word in sent_mecab if len(word) > 1]
-        # 한글자 제거
-        sent_mecab = (" ".join(sent_mecab)).strip()
-        tokenized_sentence.append(sent_mecab)
-
-    # CountVectorizer를 통한 토큰 코딩
-    vect = CountVectorizer(max_features=10000, max_df=.10)
-    X = vect.fit_transform(tokenized_sentence)
-    """
-)
-
 st.markdown("***")
 
 st.subheader("4) Word2vec 모델 학습")
